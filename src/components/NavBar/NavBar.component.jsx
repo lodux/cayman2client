@@ -9,14 +9,15 @@ const LOGO_LINK = 'https://www.caymangroup.it/wp-content/uploads/2021/03/logo_ca
 //evitiamo le ripetizioni di codice il più possibile
 
 const elementiNavBar = [
-    {
-        nome: 'HOME',
+     {
+        nome: 'GESTIONE CHIAMATE',
         link: '/'
     },
     {
-        nome: 'GESTIONE CHIAMATE',
-        link: '/gestione-chiamate'
+        nome: 'CHIAMATE EFFETTUATE',
+        link: '/chiamate-effettuate'
     },
+   
 ];
 
 const NavBar = ({ linkAttuale }) => {

@@ -1,28 +1,23 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { useEffect } from 'react';
+import { useState } from 'react';
+import moment from 'moment';
 import axios from 'axios';
-import moment from 'moment'
-import './GestoreChiamate.styles.scss';
+import { AuthContext } from '../../context/AuthContext';
+import './ChiamateEff.styles.scss'
 
-export default function GestoreChiammate() {
+export default function ChiamateEff() {
   const [calls, setCalls]=useState([]);
   const [day, setDay]=useState(null);
   useEffect(() => {
     const fetchCalls = async () => {
-      const res = await axios.get("https://main.d258pk7mr086eu.amplifyapp.com/api/chiama/ottieni-chiamate");
+      const res = await axios.get("http://localhost:8800/api/chiama/ottieni-registro");
       setCalls(res.data);
     };
     fetchCalls();
   }, []);
 
-  const handleClick=(id)=>{
-    console.log(id)
-    const DeleteCalls = async () => {
-      await axios.delete("https://main.d258pk7mr086eu.amplifyapp.com/api/chiama/"+id);
-    };
-    DeleteCalls();
-    window.location.reload(false)
-  }
+
 
   const dayz=(d)=>{
     var newd = moment.parseZone(d).format("DD-MMM-YYYY");
@@ -34,8 +29,8 @@ export default function GestoreChiammate() {
     <>
     { calls ? (
     <div className='gcCont'>
-      <h1 className="gcTit">Gestore Chiamate</h1>
-      {console.log(calls[0])}
+      <h1 className="gcTit">Registro Chiamate</h1>
+      <span className='desc'>il registro chiamate comprende l'elenco di tutte le richieste di chiamate effettuate</span>
       <div className="sez">
       {calls.map((c)=>(
         <div className="callCont"> 
@@ -46,7 +41,6 @@ export default function GestoreChiammate() {
           <span>fascia oraria:</span>
           <span className='name'>{dayz(c.day)}</span>
           <span className='name'>ore:{c.hour}</span>
-          <svg className='delete' onClick={()=>handleClick(c._id)} xmlns="http://www.w3.org/2000/svg" width="22.903" height="19.395"><path d="M22.903 2.828 20.075 0 6.641 13.435 3.102 9.09 0 11.616l6.338 7.779L22.903 2.828z"/></svg>
 
         </div>
       ))}
@@ -63,3 +57,4 @@ export default function GestoreChiammate() {
 
   )
 }
+

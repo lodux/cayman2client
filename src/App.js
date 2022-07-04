@@ -6,7 +6,7 @@ import { AuthContext } from "./context/AuthContext";
 //import con lazy per migliorare la performance
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage.page'))
 const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'))
-const HomePage=lazy(()=>import('./pages/HomePage/HomePage'))
+const ChiamateEff=lazy(()=>import('./pages/ChiamateEffetuate/ChiamateEff'))
 const GestoreChiamate=lazy(()=>import('./pages/GestoreChiamate/GestoreChiamate.component'))
 
 const App = () => {
@@ -17,9 +17,9 @@ const App = () => {
       <NavBar linkAttuale = { pathname }/>
       <Suspense fallback={<span>Loading...</span>}>
         <Routes>
-          <Route path='/' element={ user ? <HomePage/> : <LoginPage/>} />
+          <Route path='/' element={ user ? <GestoreChiamate/> : <LoginPage/>} />
           <Route path='/register' element = {  <RegisterPage/>} />
-          <Route path='/gestione-chiamate' element = { user ? <GestoreChiamate/> : <LoginPage/> } />
+          <Route path='/chiamate-effettuate' element = { user ? <ChiamateEff/> : <LoginPage/> } />
           <Route path='*' element = { <span>Page not found</span> }/> 
         </Routes>
       </Suspense>
