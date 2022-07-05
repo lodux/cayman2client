@@ -25,6 +25,7 @@ app.use(cors())
 app.use("/api/auth", authRoute);
 app.use("/api/chiama", chiamateRoute);
 
+
 app.listen(8800, ()=>{
     console.log("Backend server is running")
 })
