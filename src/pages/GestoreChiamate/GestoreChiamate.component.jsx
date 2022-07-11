@@ -15,12 +15,12 @@ export default function GestoreChiammate() {
     fetchCalls();
   }, []);
 
-  const handleClick=(id)=>{
+  const handleClick=async (id)=>{
     console.log(id)
     const DeleteCalls = async () => {
       await axios.delete("https://cayman-server-r.herokuapp.com/api/chiama/"+id);
     };
-    DeleteCalls();
+    await DeleteCalls();
     window.location.reload(false)
   }
 
