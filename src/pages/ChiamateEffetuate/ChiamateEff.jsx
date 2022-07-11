@@ -11,7 +11,7 @@ export default function ChiamateEff() {
   const [day, setDay]=useState(null);
   useEffect(() => {
     const fetchCalls = async () => {
-      const res = await axios.get("http://localhost:8800/api/chiama/ottieni-registro");
+      const res = await axios.get("https://cayman-server-r.herokuapp.com/api/chiama/ottieni-registro");
       setCalls(res.data);
     };
     fetchCalls();

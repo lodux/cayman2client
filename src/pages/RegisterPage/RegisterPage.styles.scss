@@ -11,6 +11,9 @@
     width: 70%;
     height: 70%;
     display: flex;
+    @media only screen and (max-width: 600px)  {
+      flex-direction: column;
+  }
   }
   
   .loginLeft,
@@ -26,6 +29,9 @@
     font-weight: 800;
     color: #1775ee;
     margin-bottom: 10px;
+    @media only screen and (max-width: 600px)  {
+     font-size: 40px;
+  }
   }
   
   .loginDesc {

@@ -23,7 +23,7 @@ export default function RegisterPage() {
       console.log(process.env.REACT_APP_COD)
       try { 
         if(cod.current.value=="234"){
-        await axios.post("https://main.d258pk7mr086eu.amplifyapp.com/api/auth/register/", user);
+        await axios.post("https://cayman-server-r.herokuapp.com/api/auth/register/", user);
         alert("registration succesully");
          } else {
             alert("codice di sicurezza errato")

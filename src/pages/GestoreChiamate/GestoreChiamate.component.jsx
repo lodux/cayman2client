@@ -9,7 +9,7 @@ export default function GestoreChiammate() {
   const [day, setDay]=useState(null);
   useEffect(() => {
     const fetchCalls = async () => {
-      const res = await axios.get("https://main.d258pk7mr086eu.amplifyapp.com/api/chiama/ottieni-chiamate");
+      const res = await axios.get("https://cayman-server-r.herokuapp.com/api/chiama/ottieni-chiamate");
       setCalls(res.data);
     };
     fetchCalls();
@@ -18,7 +18,7 @@ export default function GestoreChiammate() {
   const handleClick=(id)=>{
     console.log(id)
     const DeleteCalls = async () => {
-      await axios.delete("https://main.d258pk7mr086eu.amplifyapp.com/api/chiama/"+id);
+      await axios.delete("https://cayman-server-r.herokuapp.com/api/chiama/"+id);
     };
     DeleteCalls();
     window.location.reload(false)
