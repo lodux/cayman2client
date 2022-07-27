@@ -1,28 +1,34 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import "./LoginPage.styles.scss";
 import { CircularProgress } from "@material-ui/core";
 import axios from 'axios';
 import { loginCall } from "../../apiCalls";
 import { AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import { Suspense } from "react";
 
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner.component";
 
 export default function Login() {
+  const [loading,setLoading]=useState(false);
   const username = useRef();
   const password = useRef();
   const { isFetching, dispatch } = useContext(AuthContext);
   
   const handleClick = (e) => {
+    setLoading(true);
     e.preventDefault();
     loginCall(
       { username: username.current.value, password: password.current.value },
       dispatch
     );
+    setLoading(false);
   };
 
   return (
     <div className="login">
-      <div className="loginWrapper">
+       <Suspense fallback={<LoadingSpinner/>}>
+        <div className="loginWrapper">
         <div className="loginLeft">
           <h3 className="loginLogo">CaymanGroup</h3>
           <span className="loginDesc">
@@ -50,9 +56,17 @@ export default function Login() {
               className="loginInput"
              ref={password}
             />
-            <button className="loginButton" type="submit" onSubmit={handleClick}>
-                Log In 
-            </button>
+            {
+              loading ? (
+                <button className="loginButton">wait...</button>
+              ): (
+                <>
+                <button className="loginButton" type="submit">
+              Log in
+            </button> 
+            </>
+              )
+            } 
             <Link to='/register' style={{textDecoration:"none",color:"white"}}>
             <button className="loginRegisterButton">
              
@@ -63,6 +77,8 @@ export default function Login() {
           </form>
         </div>
       </div>
+       </Suspense>
+  
     </div>
   );
 }

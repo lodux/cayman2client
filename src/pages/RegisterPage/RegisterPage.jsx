@@ -1,16 +1,18 @@
 import axios from "axios";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "./RegisterPage.styles.scss";
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
+  const [load, setLoad]=useState(false);
   const username = useRef();
   const password = useRef();
   const passwordAgain = useRef();
   const cod=useRef();
 
   const handleClick = async (e) => {
+    setLoad(true);
     e.preventDefault();
     if (passwordAgain.current.value !== password.current.value) {
       passwordAgain.current.setCustomValidity("Passwords don't match!");
@@ -25,6 +27,7 @@ export default function RegisterPage() {
         if(cod.current.value=="234"){
         await axios.post("https://cayman-server-r.herokuapp.com/api/auth/register/", user);
         alert("registration succesully");
+        setLoad(false)
          } else {
             alert("codice di sicurezza errato")
          }
@@ -75,9 +78,21 @@ export default function RegisterPage() {
               className="loginInput"
               type="text"
             />
-            <button className="loginButton" type="submit">
+            <>
+           {
+              load ? (
+                <button className="loginButton">wait...</button>
+              ): (
+                <>
+                <button className="loginButton" type="submit">
               Sign Up
-            </button>
+            </button> 
+            </>
+              )
+            }  
+            </>
+           
+           
             <Link to="/" style={{textDecoration:"none"}}>
                   <button className="loginRegisterButton">Log into Account</button>
             </Link>

@@ -17,6 +17,11 @@ const elementiNavBar = [
         nome: 'CHIAMATE EFFETTUATE',
         link: '/chiamate-effettuate'
     },
+    {
+        nome: 'ADMIN/REGISTRA',
+        link: '/register'
+    },
+
    
 ];
 

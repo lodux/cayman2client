@@ -3,6 +3,9 @@ import { Routes, Route, useLocation } from "react-router-dom"
 import { Suspense, lazy, useContext } from "react"
 import { AuthContext } from "./context/AuthContext";
 
+//import loading
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner.component';
+
 //import con lazy per migliorare la performance
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage.page'))
 const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'))
@@ -15,7 +18,7 @@ const App = () => {
   return (
     <div className='App'> 
       <NavBar linkAttuale = { pathname }/>
-      <Suspense fallback={<span>Loading...</span>}>
+      <Suspense fallback={<LoadingSpinner/>}>
         <Routes>
           <Route path='/' element={ user ? <GestoreChiamate/> : <LoginPage/>} />
           <Route path='/register' element = {  <RegisterPage/>} />
